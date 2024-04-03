@@ -4,12 +4,20 @@ Sofware to transcript ASCII into desert people's writing from popular sci-fi fra
 
 ## Quick start:
 
+if you want to pass phrase as an argument:
+
 ```console
 make
 ./fremen <your text>
 ```
+if you want to input text in real time:
+
+```console
+make
+./fremen
+```
 
 ## TODO:
-- [ ] Add text box instead of passing an argument
+- [X] Add text box instead of passing an argument
 - [ ] WebAssembly compilation 
 - [ ] Option to save result as an image

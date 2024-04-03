@@ -1,6 +1,4 @@
 #include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include "raylib.h"
 
@@ -36,8 +34,123 @@ enum Character {
   U
 };
 
+void transcript(char* message, int *charcters){
+
+  for(int i = 0; message[i]; i++){
+    message[i] = tolower(message[i]);
+  }
+
+  for(int i = 0; i < 100; i++){
+    charcters[i] = 0;
+  }
+
+  for(int i = 0; i < strlen(message); i++){
+    switch (message[i]){
+      case 'b':
+        charcters[i] = B;
+        break;
+      case 'f':
+        charcters[i] = F;
+        break;
+      case 'm':
+        charcters[i] = M;
+        break;
+      case 't':
+        if(message[i+1] == 'h'){
+          charcters[i] = TH;
+          i++;
+        }
+        else{
+          charcters[i] = T;
+        }
+        break;
+      case 'd':
+        if(message[i+1] == 'h'){
+          charcters[i] = DH;
+          i++;
+        }
+        else{
+          charcters[i] = D;
+        }
+        break;
+      case 'n':
+        charcters[i] = N;
+        break;
+      case 's':
+        if(message[i+1] == 'h'){
+          charcters[i] = SH;
+          i++;
+        }
+        else{
+          charcters[i] = S;
+        }
+        break;
+      case 'z':
+        charcters[i] = Z;
+        break;
+      case 'j':
+        charcters[i] = J;
+        break;
+      case 'k':
+        if(message[i+1] == 'h'){
+          charcters[i] = KH;
+          i++;
+        }
+        else{
+          charcters[i] = K;
+        }
+        break;
+      case 'g':
+        if(message[i+1] == 'h'){
+          charcters[i] = GH;
+          i++;
+        }
+        else{
+          charcters[i] = G;
+        }
+        break;
+      case 'q':
+        charcters[i] = Q;
+        break;
+      case 'l':
+        charcters[i] = L;
+        break;
+      case 'r':
+        charcters[i] = R;
+        break;
+      case 'w':
+        charcters[i] = W;
+        break;
+      case 'y':
+        charcters[i] = Y;
+        break;
+      case 'h':
+        charcters[i] = H;
+        break;
+      case 'a':
+        charcters[i] = A;
+        break;
+      case 'e':
+        charcters[i] = E;
+        break;
+      case 'i':
+        charcters[i] = I;
+        break;
+      case 'o':
+        charcters[i] = O;
+        break;
+      case 'u':
+        charcters[i] = U;
+        break;
+      default: 
+        break;
+    }
+  }
+}
+
 char TextBuffer[MAX_STRING_LENGTH + 1] = "\0";
 int LetterCount = 0;
+bool cmd_flag = false;
 
 int main(int argc, char *argv[]){
   
@@ -45,126 +158,18 @@ int main(int argc, char *argv[]){
 
   if(argc > 1){
     msglen = strlen(argv[1]);
+    cmd_flag = true;
+  }
+  else{
+    msglen = MAX_STRING_LENGTH;
   }
 
   int charcters[100] = {0};
   char message[msglen];
 
-  if(argc > 1){
-
+  if(cmd_flag == true){
     strcpy(message, argv[1]);
-
-    for(int i = 0; message[i]; i++){
-      message[i] = tolower(message[i]);
-    }
-
-    for(int i = 0; i < strlen(message); i++){
-      switch (message[i]){
-        case 'b':
-          charcters[i] = B;
-          break;
-        case 'f':
-          charcters[i] = F;
-          break;
-        case 'm':
-          charcters[i] = M;
-          break;
-        case 't':
-          if(argv[1][i+1] == 'h'){
-            charcters[i] = TH;
-            i++;
-          }
-          else{
-            charcters[i] = T;
-          }
-          break;
-        case 'd':
-          if(argv[1][i+1] == 'h'){
-            charcters[i] = DH;
-            i++;
-          }
-          else{
-            charcters[i] = D;
-          }
-          break;
-        case 'n':
-          charcters[i] = N;
-          break;
-        case 's':
-          if(argv[1][i+1] == 'h'){
-            charcters[i] = SH;
-            i++;
-          }
-          else{
-            charcters[i] = S;
-          }
-          break;
-        case 'z':
-          charcters[i] = Z;
-          break;
-        case 'j':
-          charcters[i] = J;
-          break;
-        case 'k':
-          if(argv[1][i+1] == 'h'){
-            charcters[i] = KH;
-            i++;
-          }
-          else{
-            charcters[i] = K;
-          }
-          break;
-        case 'g':
-          if(argv[1][i+1] == 'h'){
-            charcters[i] = GH;
-            i++;
-          }
-          else{
-            charcters[i] = G;
-          }
-          break;
-        case 'q':
-          charcters[i] = Q;
-          break;
-        case 'l':
-          charcters[i] = L;
-          break;
-        case 'r':
-          charcters[i] = R;
-          break;
-        case 'w':
-          charcters[i] = W;
-          break;
-        case 'y':
-          charcters[i] = Y;
-          break;
-        case 'h':
-          charcters[i] = H;
-          break;
-        case 'a':
-          charcters[i] = A;
-          break;
-        case 'e':
-          charcters[i] = E;
-          break;
-        case 'i':
-          charcters[i] = I;
-          break;
-        case 'o':
-          charcters[i] = O;
-          break;
-        case 'u':
-          charcters[i] = U;
-          break;
-        default: 
-          break;
-      }
-    }
-    printf("%d %d %d %d %s \n",charcters[0], charcters[1], charcters[2], charcters[3], message);
-  }
-  else{
-    printf("Provide a word as an argument\n");
-    return 1;
+    transcript(message, charcters);
   }
 
   InitWindow(800, 600, "Fremen Transcriptor");
@@ -212,6 +217,9 @@ int main(int argc, char *argv[]){
   }
 
   while(!WindowShouldClose()){
+
+    transcript(message, charcters);
+
     BeginDrawing();
 
     ClearBackground((Color){255,212,94,255});
@@ -229,29 +237,30 @@ int main(int argc, char *argv[]){
     EndDrawing();
 
     //INPUT
-    
-    int PressedKey = GetCharPressed();
+    if(cmd_flag == false){
+      int PressedKey = GetCharPressed();
 
-    while(PressedKey > 0){
-      if((PressedKey >=32) && (PressedKey <= 125) && (LetterCount <= MAX_STRING_LENGTH)){
+      while(PressedKey > 0){
+        if((PressedKey >=32) && (PressedKey <= 125) && (LetterCount <= MAX_STRING_LENGTH)){
 
-        TextBuffer[LetterCount] = (char)PressedKey;
-        TextBuffer[LetterCount+1] = '\0';
-        LetterCount++;
+          TextBuffer[LetterCount] = (char)PressedKey;
+          TextBuffer[LetterCount+1] = '\0';
+          LetterCount++;
+        }
+        PressedKey = GetCharPressed();
       }
-      PressedKey = GetCharPressed();
-    }
 
-    if(IsKeyDown(KEY_BACKSPACE)){
-      WaitTime(0.2);
-      LetterCount--;
-      if(LetterCount < 0){
-        LetterCount = 0;
+      if(IsKeyDown(KEY_BACKSPACE)){
+        WaitTime(0.2);
+        LetterCount--;
+        if(LetterCount < 0){
+          LetterCount = 0;
+        }
+        TextBuffer[LetterCount] = '\0';
+
       }
-      TextBuffer[LetterCount] = '\0';
-
-    }
-
+      strcpy(message, TextBuffer);
+    } 
     //INPUT
   }
 
