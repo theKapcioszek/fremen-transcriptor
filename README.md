@@ -5,7 +5,7 @@ Sofware to transcript ASCII into desert people's writing from popular sci-fi fra
 ## Quick start:
 
 ```console
-./make
+make
 ./fremen <your text>
 ```
 
