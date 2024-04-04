@@ -3,6 +3,8 @@
 #include "raylib.h"
 
 #define MAX_STRING_LENGTH 50
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 enum Character {
   B = 1,
@@ -172,7 +174,7 @@ int main(int argc, char *argv[]){
     transcript(message, charcters);
   }
 
-  InitWindow(800, 600, "Fremen Transcriptor");
+  InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Fremen Transcriptor");
   SetTargetFPS(60);
 
   Image characters_img[28] = {0};
@@ -207,7 +209,7 @@ int main(int argc, char *argv[]){
   characters_img[27] = LoadImage("assets/U.png");
 
   for(int i = 0; i <= 27; i++){
-    ImageResizeNN(&characters_img[i], 64, 64);
+    ImageResizeNN(&characters_img[i], 64*(SCREEN_WIDTH/800), 64*(SCREEN_HEIGHT/600));
   }
 
   Texture2D characters_tex[28] = {0};
@@ -227,12 +229,12 @@ int main(int argc, char *argv[]){
     int cursor_pos = 0;
     for(int i = 99; i >= 0; i--){
       if(charcters[i] > 0){
-        DrawTexture(characters_tex[charcters[i]], 400-((strlen(message)/2)*60)+(60*cursor_pos), 300, WHITE);
+        DrawTexture(characters_tex[charcters[i]], (SCREEN_WIDTH/2)-((strlen(message)/2)*60)+(60*cursor_pos), (SCREEN_HEIGHT/2), WHITE);
         cursor_pos++;
       }
     }
 
-    DrawText(TextBuffer, 400-(MeasureText(TextBuffer, 30)/2), 100, 30, BLACK);
+    DrawText(TextBuffer, (SCREEN_WIDTH/2)-(MeasureText(TextBuffer, 30)/2), (SCREEN_HEIGHT/6), (SCREEN_HEIGHT/20), BLACK);
 
     EndDrawing();
 
@@ -241,7 +243,7 @@ int main(int argc, char *argv[]){
       int PressedKey = GetCharPressed();
 
       while(PressedKey > 0){
-        if((PressedKey >=32) && (PressedKey <= 125) && (LetterCount <= MAX_STRING_LENGTH)){
+        if((PressedKey > 32) && (PressedKey <= 125) && (LetterCount <= MAX_STRING_LENGTH)){
 
           TextBuffer[LetterCount] = (char)PressedKey;
           TextBuffer[LetterCount+1] = '\0';
