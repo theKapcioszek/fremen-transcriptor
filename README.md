@@ -16,6 +16,7 @@ if you want to input text in real time:
 make
 ./fremen
 ```
+Press *f2* to take a screenshot and *f3* to capture only generated text 
 
 ## TODO:
 - [X] Add text box instead of passing an argument

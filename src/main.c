@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <stdio.h>
 #include <string.h>
 #include "raylib.h"
 
@@ -150,9 +151,37 @@ void transcript(char* message, int *charcters){
   }
 }
 
+void screenshot(bool fullscreen, char* message){
+  Image screenshot = LoadImageFromScreen();
+  if(!fullscreen){
+    ImageCrop(&screenshot, (Rectangle){
+      (SCREEN_WIDTH/2)-((strlen(message)/2)*60)-5,
+      (SCREEN_HEIGHT/2)-5,
+      (64*(SCREEN_WIDTH/800)*strlen(message))+7,
+      (64*(SCREEN_HEIGHT/600))+7
+    });
+    char filename[strlen(message)+4];
+    strcpy(filename, message);
+    strcat(filename, ".png");
+    ExportImage(screenshot, filename);
+  }
+  else{
+    int file_count = 1;
+    char filename[strlen("screenshot")+10];
+    strcpy(filename, "screenshot.png");
+    while(FileExists(filename)){
+      strcpy(filename, "");
+      sprintf(filename, "screenshot%d.png", file_count);
+      file_count++;
+    }
+    ExportImage(screenshot, filename);
+  }
+}
+
 char TextBuffer[MAX_STRING_LENGTH + 1] = "\0";
 int LetterCount = 0;
 bool cmd_flag = false;
+int cursor_pos_backup = 0;
 
 int main(int argc, char *argv[]){
   
@@ -221,8 +250,11 @@ int main(int argc, char *argv[]){
   while(!WindowShouldClose()){
 
     if(IsKeyPressed(KEY_F2)){
-      Image screenshot = LoadImageFromScreen();
-      ExportImage(screenshot, "screenshot.png");
+      screenshot(true, message);
+    }
+
+    if(IsKeyPressed(KEY_F3)){
+      screenshot(false, message);
     }
 
     transcript(message, charcters);
