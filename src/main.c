@@ -220,6 +220,11 @@ int main(int argc, char *argv[]){
 
   while(!WindowShouldClose()){
 
+    if(IsKeyPressed(KEY_F2)){
+      Image screenshot = LoadImageFromScreen();
+      ExportImage(screenshot, "screenshot.png");
+    }
+
     transcript(message, charcters);
 
     BeginDrawing();

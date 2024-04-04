@@ -21,3 +21,10 @@ make
 - [X] Add text box instead of passing an argument
 - [ ] WebAssembly compilation 
 - [ ] Option to save result as an image
+
+<br><br>
+
+<p align=center>
+  <img src="./screenshot.png">
+</p>
+
