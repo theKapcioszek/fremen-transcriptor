@@ -7,6 +7,9 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+#define CHAR_WIDTH ((SCREEN_WIDTH/800)*64)
+#define CHAR_HEIGHT ((SCREEN_HEIGHT/600)*64)
+
 enum Character {
   B = 1,
   F,
@@ -157,8 +160,8 @@ void screenshot(bool fullscreen, char* message){
     ImageCrop(&screenshot, (Rectangle){
       (SCREEN_WIDTH/2)-((strlen(message)/2)*60)-5,
       (SCREEN_HEIGHT/2)-5,
-      (64*(SCREEN_WIDTH/800)*strlen(message))+7,
-      (64*(SCREEN_HEIGHT/600))+7
+      (CHAR_WIDTH*strlen(message))+7,
+      CHAR_HEIGHT+7
     });
     char filename[strlen(message)+4];
     strcpy(filename, message);
@@ -238,7 +241,7 @@ int main(int argc, char *argv[]){
   characters_img[27] = LoadImage("assets/U.png");
 
   for(int i = 0; i <= 27; i++){
-    ImageResizeNN(&characters_img[i], 64*(SCREEN_WIDTH/800), 64*(SCREEN_HEIGHT/600));
+    ImageResizeNN(&characters_img[i], CHAR_WIDTH, CHAR_HEIGHT);
   }
 
   Texture2D characters_tex[28] = {0};
