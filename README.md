@@ -21,7 +21,7 @@ Press **f2** to take a screenshot and **f3** to capture only generated text
 ## TODO:
 - [X] Add text box instead of passing an argument
 - [ ] WebAssembly compilation 
-- [ ] Option to save result as an image
+- [X] Option to save result as an image
 
 <br><br>
 
