@@ -10,6 +10,16 @@
 #define CHAR_WIDTH ((SCREEN_WIDTH/800)*64)
 #define CHAR_HEIGHT ((SCREEN_HEIGHT/600)*64)
 
+char concat_result[255];
+
+char *concat(const char* str1, const char* str2){
+
+  strcpy(concat_result, str1);
+  strcat(concat_result, str2);
+
+  return concat_result;
+}
+
 enum Character {
   B = 1,
   F,
@@ -187,7 +197,9 @@ bool cmd_flag = false;
 int cursor_pos_backup = 0;
 
 int main(int argc, char *argv[]){
-  
+
+  const char *executablePath = GetApplicationDirectory();
+
   int msglen = 0;
 
   if(argc > 1){
@@ -212,33 +224,33 @@ int main(int argc, char *argv[]){
   Image characters_img[28] = {0};
   
   characters_img[0] = GenImageColor(1, 1, WHITE);
-  characters_img[1] = LoadImage("assets/B.png");
-  characters_img[2] = LoadImage("assets/F.png");
-  characters_img[3] = LoadImage("assets/M.png");
-  characters_img[4] = LoadImage("assets/T.png");
-  characters_img[5] = LoadImage("assets/TH.png");
-  characters_img[6] = LoadImage("assets/D.png");
-  characters_img[7] = LoadImage("assets/DH.png");
-  characters_img[8] = LoadImage("assets/N.png");
-  characters_img[9] = LoadImage("assets/S.png");
-  characters_img[10] = LoadImage("assets/SH.png");
-  characters_img[11] = LoadImage("assets/Z.png");
-  characters_img[12] = LoadImage("assets/J.png");
-  characters_img[13] = LoadImage("assets/K.png");
-  characters_img[14] = LoadImage("assets/KH.png");
-  characters_img[15] = LoadImage("assets/G.png");
-  characters_img[16] = LoadImage("assets/GH.png");
-  characters_img[17] = LoadImage("assets/Q.png");
-  characters_img[18] = LoadImage("assets/L.png");
-  characters_img[19] = LoadImage("assets/R.png");
-  characters_img[20] = LoadImage("assets/W.png");
-  characters_img[21] = LoadImage("assets/Y.png");
-  characters_img[22] = LoadImage("assets/H.png");
-  characters_img[23] = LoadImage("assets/A.png");
-  characters_img[24] = LoadImage("assets/E.png");
-  characters_img[25] = LoadImage("assets/I.png");
-  characters_img[26] = LoadImage("assets/O.png");
-  characters_img[27] = LoadImage("assets/U.png");
+  characters_img[1] = LoadImage(concat(executablePath,"fremen-assets/B.png"));
+  characters_img[2] = LoadImage(concat(executablePath,"fremen-assets/F.png"));
+  characters_img[3] = LoadImage(concat(executablePath,"fremen-assets/M.png"));
+  characters_img[4] = LoadImage(concat(executablePath,"fremen-assets/T.png"));
+  characters_img[5] = LoadImage(concat(executablePath,"fremen-assets/TH.png"));
+  characters_img[6] = LoadImage(concat(executablePath,"fremen-assets/D.png"));
+  characters_img[7] = LoadImage(concat(executablePath,"fremen-assets/DH.png"));
+  characters_img[8] = LoadImage(concat(executablePath,"fremen-assets/N.png"));
+  characters_img[9] = LoadImage(concat(executablePath,"fremen-assets/S.png"));
+  characters_img[10] = LoadImage(concat(executablePath,"fremen-assets/SH.png"));
+  characters_img[11] = LoadImage(concat(executablePath,"fremen-assets/Z.png"));
+  characters_img[12] = LoadImage(concat(executablePath,"fremen-assets/J.png"));
+  characters_img[13] = LoadImage(concat(executablePath,"fremen-assets/K.png"));
+  characters_img[14] = LoadImage(concat(executablePath,"fremen-assets/KH.png"));
+  characters_img[15] = LoadImage(concat(executablePath,"fremen-assets/G.png"));
+  characters_img[16] = LoadImage(concat(executablePath,"fremen-assets/GH.png"));
+  characters_img[17] = LoadImage(concat(executablePath,"fremen-assets/Q.png"));
+  characters_img[18] = LoadImage(concat(executablePath,"fremen-assets/L.png"));
+  characters_img[19] = LoadImage(concat(executablePath,"fremen-assets/R.png"));
+  characters_img[20] = LoadImage(concat(executablePath,"fremen-assets/W.png"));
+  characters_img[21] = LoadImage(concat(executablePath,"fremen-assets/Y.png"));
+  characters_img[22] = LoadImage(concat(executablePath,"fremen-assets/H.png"));
+  characters_img[23] = LoadImage(concat(executablePath,"fremen-assets/A.png"));
+  characters_img[24] = LoadImage(concat(executablePath,"fremen-assets/E.png"));
+  characters_img[25] = LoadImage(concat(executablePath,"fremen-assets/I.png"));
+  characters_img[26] = LoadImage(concat(executablePath,"fremen-assets/O.png"));
+  characters_img[27] = LoadImage(concat(executablePath,"fremen-assets/U.png"));
 
   for(int i = 0; i <= 27; i++){
     ImageResizeNN(&characters_img[i], CHAR_WIDTH, CHAR_HEIGHT);
