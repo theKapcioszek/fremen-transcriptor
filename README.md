@@ -17,7 +17,10 @@ if you want to input text in real time:
 ```console
 make
 ./fremen
-```  
+```
+
+Also available as an **AUR Package**:  
+[https://aur.archlinux.org/packages/fremen-transcriptor-git](https://aur.archlinux.org/packages/fremen-transcriptor-git)
 
 ### Windows  
 
