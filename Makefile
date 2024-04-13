@@ -1,10 +1,13 @@
+DESTDIR := /opt
+SYMLINK := /bin
+
 fremen: ./src/main.c
 	cc -o fremen src/main.c -I./raylib/raylib-5.0_linux_amd64/include -L./raylib/raylib-5.0_linux_amd64/lib/ -l:libraylib.a -lm
 install:
-	mkdir /opt/fremen-transcriptor
-	cp fremen /opt/fremen-transcriptor
-	cp -r fremen-assets /opt/fremen-transcriptor
-	ln -s /opt/fremen-transcriptor/fremen /bin/fremen-transcriptor
+	mkdir $(DESTDIR)/fremen-transcriptor
+	cp fremen $(DESTDIR)/fremen-transcriptor
+	cp -r fremen-assets $(DESTDIR)/fremen-transcriptor
+	ln -s $(DESTDIR)/fremen-transcriptor/fremen $(SYMLINK)/fremen-transcriptor
 uninstall:
-	rm -rf /bin/fremen-transcriptor
-	rm -rf /opt/fremen-transcriptor/
+	rm -rf $(SYMLINK)/fremen-transcriptor
+	rm -rf $(DESTDIR)/fremen-transcriptor/
