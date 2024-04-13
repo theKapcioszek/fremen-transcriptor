@@ -4,6 +4,8 @@ Sofware to transcript ASCII into desert people's writing from popular sci-fi fra
 
 ## Quick start:
 
+### Linux  
+
 if you want to pass phrase as an argument:
 
 ```console
@@ -15,7 +17,12 @@ if you want to input text in real time:
 ```console
 make
 ./fremen
-```
+```  
+
+### Windows  
+
+Download the zip from releases (Currently only x86_64 supported)
+
 Press **f2** to take a screenshot and **f3** to capture only generated text 
 
 ## TODO:
