@@ -4,4 +4,5 @@ raylib/raylib-5.0_webassembly/
 raylib/raylib-5.0_win32_mingw-w64/
 *.exe
 *.zip
-linux_release/
+*.gz
+*x86_64

@@ -5,8 +5,8 @@ Software to transcript ASCII into desert people's writing from popular sci-fi fr
 ## Quick start:  
 
 ### Linux & Windows:  
-- Download the zip file from [Releases tab](https://github.com/theKapcioszek/fremen-transcriptor/releases) for your respectible system
-- Extract the zip file
+- Download the archive file from [Releases tab](https://github.com/theKapcioszek/fremen-transcriptor/releases) for your respectible system
+- Extract the archive file
 - Run the fremen-transcriptor executable
 - enjoy :)
 - Press **f2** to take a screenshot and **f3** to capture only generated text
