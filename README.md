@@ -13,7 +13,8 @@ Software to transcript ASCII into desert people's writing from popular sci-fi fr
 - Press **Select** button in GUI window to select a directory and save your screenshot  
 
 Also available as an **AUR Package** for Arch Linux:  
-[https://aur.archlinux.org/packages/fremen-transcriptor-git](https://aur.archlinux.org/packages/fremen-transcriptor-git)  
+- binary: [https://aur.archlinux.org/packages/fremen-transcriptor-bin](https://aur.archlinux.org/packages/fremen-transcriptor-bin)
+- source: [https://aur.archlinux.org/packages/fremen-transcriptor-git](https://aur.archlinux.org/packages/fremen-transcriptor-git)  
 
 ## Building:
 
