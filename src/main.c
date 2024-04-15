@@ -3,6 +3,13 @@
 #include <string.h>
 #include "raylib.h"
 
+#define RAYGUI_IMPLEMENTATION
+#include "../raygui-4.0/src/raygui.h"
+#undef RAYGUI_IMPLEMENTATION
+
+#define GUI_WINDOW_FILE_DIALOG_IMPLEMENTATION
+#include "../raygui-4.0/examples/custom_file_dialog/gui_window_file_dialog.h"
+
 #define MAX_STRING_LENGTH 50
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
@@ -164,7 +171,7 @@ void transcript(char* message, int *charcters){
   }
 }
 
-void screenshot(bool fullscreen, char* message){
+void screenshot(bool fullscreen, char* message, char* filename){
   Image screenshot = LoadImageFromScreen();
   if(!fullscreen){
     ImageCrop(&screenshot, (Rectangle){
@@ -173,20 +180,9 @@ void screenshot(bool fullscreen, char* message){
       (CHAR_WIDTH*strlen(message))+7,
       CHAR_HEIGHT+7
     });
-    char filename[strlen(message)+4];
-    strcpy(filename, message);
-    strcat(filename, ".png");
     ExportImage(screenshot, filename);
   }
   else{
-    int file_count = 1;
-    char filename[strlen("screenshot")+10];
-    strcpy(filename, "screenshot.png");
-    while(FileExists(filename)){
-      strcpy(filename, "");
-      sprintf(filename, "screenshot%d.png", file_count);
-      file_count++;
-    }
     ExportImage(screenshot, filename);
   }
 }
@@ -194,11 +190,14 @@ void screenshot(bool fullscreen, char* message){
 char TextBuffer[MAX_STRING_LENGTH + 1] = "\0";
 int LetterCount = 0;
 bool cmd_flag = false;
+bool fullscreen_flag = true;
 int cursor_pos_backup = 0;
 
 int main(int argc, char *argv[]){
 
   const char *executablePath = GetApplicationDirectory();
+
+  GuiWindowFileDialogState fileDialogState = InitGuiWindowFileDialog(GetWorkingDirectory());
 
   int msglen = 0;
 
@@ -264,12 +263,43 @@ int main(int argc, char *argv[]){
 
   while(!WindowShouldClose()){
 
+    if (fileDialogState.SelectFilePressed)
+    {
+      char fileNameToSave[512] = { 0 };
+      strcpy(fileNameToSave, TextFormat("%s" PATH_SEPERATOR "%s" "%s", fileDialogState.dirPathText, message, ".png"));
+
+      fileDialogState.SelectFilePressed = false;
+      screenshot(fullscreen_flag, message, fileNameToSave);
+      cmd_flag = false;
+    }
+
     if(IsKeyPressed(KEY_F2)){
-      screenshot(true, message);
+      //int file_count = 1;
+      //char filename[strlen("screenshot")+10];
+      //strcpy(filename, "screenshot.png");
+      //while(FileExists(filename)){
+      //  strcpy(filename, "");
+      //  sprintf(filename, "screenshot%d.png", file_count);
+      //  file_count++;
+      //}
+      //screenshot(true, message, filename);
+      
+      cmd_flag = true;
+      fullscreen_flag = true;
+      fileDialogState.dragMode = true;
+      fileDialogState.windowActive = true;
     }
 
     if(IsKeyPressed(KEY_F3)){
-      screenshot(false, message);
+      //char filename[strlen(message)+4];
+      //strcpy(filename, message);
+      //strcat(filename, ".png");
+      //screenshot(false, message, filename);
+
+      cmd_flag = true;
+      fileDialogState.dragMode = true;
+      fileDialogState.windowActive = true;
+      fullscreen_flag = false;
     }
 
     transcript(message, charcters);
@@ -287,6 +317,9 @@ int main(int argc, char *argv[]){
     }
 
     DrawText(TextBuffer, (SCREEN_WIDTH/2)-(MeasureText(TextBuffer, 30)/2), (SCREEN_HEIGHT/6), (SCREEN_HEIGHT/20), BLACK);
+
+    GuiWindowFileDialog(&fileDialogState);
+    fileDialogState.dragMode = false;
 
     EndDrawing();
 
