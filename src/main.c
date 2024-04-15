@@ -171,27 +171,28 @@ void transcript(char* message, int *charcters){
   }
 }
 
-void screenshot(bool fullscreen, char* message, char* filename){
-  Image screenshot = LoadImageFromScreen();
+Image screenshot(bool fullscreen, char* message){
+  Image the_screenshot = LoadImageFromScreen();
   if(!fullscreen){
-    ImageCrop(&screenshot, (Rectangle){
+    ImageCrop(&the_screenshot, (Rectangle){
       (SCREEN_WIDTH/2)-((strlen(message)/2)*60)-5,
       (SCREEN_HEIGHT/2)-5,
       (CHAR_WIDTH*strlen(message))+7,
       CHAR_HEIGHT+7
     });
-    ExportImage(screenshot, filename);
+    return the_screenshot;
   }
   else{
-    ExportImage(screenshot, filename);
+    return the_screenshot;
   }
 }
 
 char TextBuffer[MAX_STRING_LENGTH + 1] = "\0";
 int LetterCount = 0;
 bool cmd_flag = false;
-bool fullscreen_flag = true;
 int cursor_pos_backup = 0;
+
+Image image = {0};
 
 int main(int argc, char *argv[]){
 
@@ -269,7 +270,7 @@ int main(int argc, char *argv[]){
       strcpy(fileNameToSave, TextFormat("%s" PATH_SEPERATOR "%s" "%s", fileDialogState.dirPathText, message, ".png"));
 
       fileDialogState.SelectFilePressed = false;
-      screenshot(fullscreen_flag, message, fileNameToSave);
+      ExportImage(image, fileNameToSave);
       cmd_flag = false;
     }
 
@@ -282,10 +283,10 @@ int main(int argc, char *argv[]){
       //  sprintf(filename, "screenshot%d.png", file_count);
       //  file_count++;
       //}
-      //screenshot(true, message, filename);
+      //ExportImage(screenshot(true, message),filename);
       
+      image = screenshot(true, message);
       cmd_flag = true;
-      fullscreen_flag = true;
       fileDialogState.dragMode = true;
       fileDialogState.windowActive = true;
     }
@@ -294,12 +295,12 @@ int main(int argc, char *argv[]){
       //char filename[strlen(message)+4];
       //strcpy(filename, message);
       //strcat(filename, ".png");
-      //screenshot(false, message, filename);
+      //ExportImage(screenshot(false, message),filename);
 
+      image = screenshot(false, message);
       cmd_flag = true;
       fileDialogState.dragMode = true;
       fileDialogState.windowActive = true;
-      fullscreen_flag = false;
     }
 
     transcript(message, charcters);
