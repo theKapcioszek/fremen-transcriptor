@@ -354,9 +354,9 @@ int main(int argc, char *argv[]){
 
   for(int i = 0; i <= 27; i++){
     UnloadImage(characters_img[i]);
-    UnloadImage(image);
     UnloadTexture(characters_tex[i]);
   }
+  UnloadImage(image);
 
   return 0;
 }
