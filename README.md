@@ -8,7 +8,8 @@ Software to transcript ASCII into desert people's writing from popular sci-fi fr
 - Download the archive file from [Releases tab](https://github.com/theKapcioszek/fremen-transcriptor/releases) for your respectible system
 - Extract the archive file
 - Run the fremen-transcriptor executable
-- enjoy :)
+- Enjoy :)
+- Start typing some text to see the result
 - Press **f2** to take a screenshot and **f3** to capture only generated text
 - Press **Select** button in GUI window to select a directory and save your screenshot  
 
