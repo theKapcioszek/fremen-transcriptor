@@ -54,7 +54,17 @@ enum Character {
   E,
   I,
   O,
-  U
+  U,
+  c_0,
+  c_1,
+  c_2,
+  c_3,
+  c_4,
+  c_5,
+  c_6,
+  c_7,
+  c_8,
+  c_9
 };
 
 void transcript(char* message, int *charcters){
@@ -165,6 +175,36 @@ void transcript(char* message, int *charcters){
       case 'u':
         charcters[i] = U;
         break;
+      case '0':
+        charcters[i] = c_0;
+        break;
+      case '1':
+        charcters[i] = c_1;
+        break;
+      case '2':
+        charcters[i] = c_2;
+        break;
+      case '3':
+        charcters[i] = c_3;
+        break;
+      case '4':
+        charcters[i] = c_4;
+        break;
+      case '5':
+        charcters[i] = c_5;
+        break;
+      case '6':
+        charcters[i] = c_6;
+        break;
+      case '7':
+        charcters[i] = c_7;
+        break;
+      case '8':
+        charcters[i] = c_8;
+        break;
+      case '9':
+        charcters[i] = c_9;
+        break;
       default: 
         break;
     }
@@ -221,7 +261,7 @@ int main(int argc, char *argv[]){
   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Fremen Transcriptor");
   SetTargetFPS(60);
 
-  Image characters_img[28] = {0};
+  Image characters_img[38] = {0};
   
   characters_img[0] = GenImageColor(1, 1, WHITE);
   characters_img[1] = LoadImage(concat(executablePath,"fremen-assets/B.png"));
@@ -251,14 +291,24 @@ int main(int argc, char *argv[]){
   characters_img[25] = LoadImage(concat(executablePath,"fremen-assets/I.png"));
   characters_img[26] = LoadImage(concat(executablePath,"fremen-assets/O.png"));
   characters_img[27] = LoadImage(concat(executablePath,"fremen-assets/U.png"));
+  characters_img[28] = LoadImage(concat(executablePath,"fremen-assets/c_0.png"));
+  characters_img[29] = LoadImage(concat(executablePath,"fremen-assets/c_1.png"));
+  characters_img[30] = LoadImage(concat(executablePath,"fremen-assets/c_2.png"));
+  characters_img[31] = LoadImage(concat(executablePath,"fremen-assets/c_3.png"));
+  characters_img[32] = LoadImage(concat(executablePath,"fremen-assets/c_4.png"));
+  characters_img[33] = LoadImage(concat(executablePath,"fremen-assets/c_5.png"));
+  characters_img[34] = LoadImage(concat(executablePath,"fremen-assets/c_6.png"));
+  characters_img[35] = LoadImage(concat(executablePath,"fremen-assets/c_7.png"));
+  characters_img[36] = LoadImage(concat(executablePath,"fremen-assets/c_8.png"));
+  characters_img[37] = LoadImage(concat(executablePath,"fremen-assets/c_9.png"));
 
-  for(int i = 0; i <= 27; i++){
+  for(int i = 0; i <= 37; i++){
     ImageResizeNN(&characters_img[i], CHAR_WIDTH, CHAR_HEIGHT);
   }
 
-  Texture2D characters_tex[28] = {0};
+  Texture2D characters_tex[38] = {0};
 
-  for(int i = 0; i <= 27; i++){
+  for(int i = 0; i <= 37; i++){
     characters_tex[i] = LoadTextureFromImage(characters_img[i]);
   }
 
@@ -352,7 +402,7 @@ int main(int argc, char *argv[]){
     //INPUT
   }
 
-  for(int i = 0; i <= 27; i++){
+  for(int i = 0; i <= 37; i++){
     UnloadImage(characters_img[i]);
     UnloadTexture(characters_tex[i]);
   }
