@@ -39,7 +39,7 @@ If you do you can also submit a pull request :)
 ## TODO:
 - [X] Add text box instead of passing an argument
 - [X] Option to save result as an image
-- [ ] Add numbers
+- [X] Add numbers
 
 <br><br>
 
